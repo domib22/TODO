@@ -1,6 +1,5 @@
 package org.example;
 
-import jdk.nashorn.internal.ir.CallNode;
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.plus.webapp.EnvConfiguration;
 import org.eclipse.jetty.plus.webapp.PlusConfiguration;
