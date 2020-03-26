@@ -26,7 +26,7 @@ public class App {
         webapp.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern", ".*/classes/.*");
 
         //webapp.addServlet(HelloServlet.class, "/api/*");
-        Server server = new Server(8082);
+        Server server = new Server(8081);
         server.setHandler(webapp);
 
         server.start();
