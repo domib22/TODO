@@ -1,0 +1,1 @@
+insert into LANGUAGES (WELCOMEMSG, CODE) values ('Hallo!', 'de');
