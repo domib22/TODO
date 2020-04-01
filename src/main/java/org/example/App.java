@@ -27,7 +27,7 @@ public class App {
         });
         webapp.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern", ".*/classes/.*");
 
-        //webapp.addServlet(HelloServlet.class, "/api/*");
+        //webapp.addServlet(HelloServlet.class, "/api");
         Server server = new Server(8081);
         server.setHandler(webapp);
         server.addLifeCycleListener(new AbstractLifeCycle.AbstractLifeCycleListener() {

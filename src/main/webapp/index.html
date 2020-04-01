@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TODO LIST</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css"
+          integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+</head>
+<body>
+<form id="welcome" class="pure-form" style="width: 40%; margin: 0 auto">
+    <input type="text" class="pure-input-rounded" placeholder="name" name="name">
+    <fieldset id="langs"></fieldset>
+    <button id="btn" type="submit" class="pure-button pure-button-primary">Submit</button>
+</form>
+<div id="wel" style="width: 40%; margin: 0 auto"></div>
+<script type="text/javascript">
+    const API_URL = 'http://localhost:8081/api';
+
+    const CODE_TO_EMOJI = {
+        'pl': '🇵🇱',
+        'en': '🇬🇧',
+        'de': '🇩🇪'
+    };
+    fetch(`${API_URL}/langs`)
+        .then(response => response.json())
+        .then((langArr) => {
+            const checkboxes = langArr.map(l => `
+            <label class="pure-radio">
+                <input type="radio" name="lang" value="${l.id}">
+                ${CODE_TO_EMOJI[l.code]}
+            </label>
+            `).join('\n');
+            document.getElementById('langs').innerHTML = checkboxes;
+        });
+    const div = document.getElementById("wel");
+    const form = document.getElementById("welcome");
+    document.getElementById("btn").addEventListener('click', (event) => {
+    event.preventDefault();
+    const formObj = {
+        name: form.elements.name.value,
+        lang: form.elements.lang.value
+    };
+    fetch(`${API_URL}?${new URLSearchParams(formObj)}`)
+    .then(response => response.text())
+    .then((text) => {
+        div.innerHTML = `
+            <h1>${text}</h1>
+        `;
+    });
+
+});
+</script>
+</body>
+</html>
