@@ -1,10 +1,10 @@
 package org.example.hello;
 
-import org.example.hello.HelloService;
 import org.example.lang.Lang;
 import org.example.lang.LangRepository;
 import org.junit.Test;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -20,7 +20,7 @@ public class HelloServiceTest {
         HelloService SUT = new HelloService(mockRepository);
 
         // when
-        String result = SUT.prepareGreeting(null, "-1");
+        String result = SUT.prepareGreeting(null, -1);
 
         // then
         assertEquals(WELCOME + " " + HelloService.DEFAULT_NAME + "!", result);
@@ -34,7 +34,7 @@ public class HelloServiceTest {
         String name = "testName";
 
         // when
-        String result = SUT.prepareGreeting(name, "-1");
+        String result = SUT.prepareGreeting(name, -1);
 
         // then
         assertEquals(WELCOME + " " + name + "!", result);
@@ -54,26 +54,13 @@ public class HelloServiceTest {
     }
 
     @Test
-    public void test_prepareGreeting_textLang_returnsIdLang() {
-        // given
-        LangRepository mockRepository = defaultLangIdRepository();
-        HelloService SUT = new HelloService(mockRepository);
-
-        // when
-        String result = SUT.prepareGreeting(null, "abc");
-
-        // then
-        assertEquals(DEFAULT_WELCOME_MSG + " " + HelloService.DEFAULT_NAME + "!", result);
-    }
-
-    @Test
     public void test_prepareGreeting_nonExistingLang_returnsDefaultLang() {
         // given
         LangRepository mockRepository = nonLangIdRepository();
         HelloService SUT = new HelloService(mockRepository);
 
         // when
-        String result = SUT.prepareGreeting(null, "-1");
+        String result = SUT.prepareGreeting(null, -1);
 
         // then
         assertEquals(HelloService.DEFAULT_LANG.getWelcomeMsg() + " " + HelloService.DEFAULT_NAME + "!", result);

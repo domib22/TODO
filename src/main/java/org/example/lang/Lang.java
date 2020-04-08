@@ -14,6 +14,7 @@ public class Lang {
     @GeneratedValue(generator = "inc")
     @GenericGenerator(name = "inc", strategy = "increment")
     private Integer id;
+
     private String welcomeMsg;
     private String code;
 
